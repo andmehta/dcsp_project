@@ -37,6 +37,7 @@ class Inventory
         <th>Item Price</th>
         <th>Fish Color</th>
         <th>Fish Species</th>
+        <th>Item Quantity</th>
       </tr>";
         //starting the Database Connection
         require 'login.php';
@@ -53,7 +54,8 @@ class Inventory
             $itemPrice = $row['itemPrice'];
             $fishColor = $row['fishColor'];
             $fishSpecies = $row['fishSpecies'];
-            $this->printHtml($itemID,$itemPrice, $fishColor,$fishSpecies);
+            $itemQuantity = $row['quantity'];
+            $this->printHtml($itemID,$itemPrice, $fishColor,$fishSpecies, $itemQuantity);
         }
         echo "</table>";
     }
@@ -67,7 +69,7 @@ class Inventory
         <th>Item Price</th>
         <th>Plant Size</th>
         <th>Plant Species</th>
-        <th>Current Inventory</th>
+        <th>Item Quantity</th>
       </tr>";
         //starting the Database Connection
         require 'login.php';
@@ -84,7 +86,8 @@ class Inventory
             $itemPrice = $row['itemPrice'];
             $plantSize = $row['plantSize'];
             $plantSpecies = $row['plantSpecies'];
-            $this->printHtml($itemID,$itemPrice, $plantSize,$plantSpecies);
+            $itemQuantity = $row['quantity'];
+            $this->printHtml($itemID,$itemPrice, $plantSize,$plantSpecies, $itemQuantity);
         }
         echo "</table>";
     }
@@ -98,6 +101,7 @@ class Inventory
         <th>Item Price</th>
         <th>Fish Color</th>
         <th>Fish Species</th>
+        <th>Item Quantity</th>
       </tr>";
         //starting the Database Connection
         require 'login.php';
@@ -128,7 +132,7 @@ class Inventory
         <th>Item Price</th>
         <th>Plant Size</th>
         <th>Plant Species</th>
-        <th>Current Inventory</th>
+        <th>Item Quantity</th>
       </tr>";
         //starting the Database Connection
         require 'login.php';
@@ -145,7 +149,7 @@ class Inventory
             $itemPrice = $row['itemPrice'];
             $plantSize = $row['plantSize'];
             $plantSpecies = $row['plantSpecies'];
-            $inventory = $row['inventory'];
+            $quantity = $row['quantity'];
         }
         echo "</table>";
     }
