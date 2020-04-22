@@ -1,15 +1,9 @@
 <?php
-
 require_once 'login.php';
 $connection = new mysqli($host, $user, $pass, $db_name);
-
 if ($connection->connect_error) {
     die($connection->connect_error);
 }
-$query = "DROP TABLE users";
-$query = "DROP TABLE PlantInventory";
-$query = "DROP TABLE FishInventory";
-
 
 // --------------- Creating the USERS Table --------------- //
 $query = "CREATE TABLE users (
@@ -59,15 +53,13 @@ echo 'Table Users created and populated<br>';
 
 function add_user($connection, $fn, $sn, $ty, $un, $pw)
 {
-    $query = "INSERT INTO Users (forename, surname, type, username, password)
+    $query = "INSERT INTO users (forename, surname, type, username, password)
       VALUES('$fn', '$sn', '$ty', '$un', '$pw')";
     $result = $connection->query($query);
     if (!$result){
         die($connection->error);
     }
 }
-$connection->close();
-
 // --------------- Finished the USERS Table --------------- //
 
 
@@ -86,7 +78,7 @@ $query = "CREATE TABLE PlantInventory (
     itemPrice    VARCHAR(32),
     plantSize    VARCHAR(32),
     plantSpecies VARCHAR(10),
-    inventory    VARCHAR(10),
+    quantity    VARCHAR(10)
   )";
 
 $result = $connection->query($query);
@@ -102,10 +94,10 @@ add_plant($connection, "0005", "$189", "5", "vine", "2");
 add_plant($connection, "0006", "$24", "6", "flower", "2");
 add_plant($connection, "0007", "$60", "7", "vegetable", "2");
 
-function add_plant($connection, $iid, $ip, $psize, $pspecies, $inventory)
+function add_plant($connection, $iid, $ip, $psize, $pspecies, $quantity)
 {
-    $query = "INSERT INTO PlantInventory (itemID, itemPrice, plantSize, plantSpecies, inventory)
-      VALUES ('$iid', '$ip', '$psize', '$pspecies', '$inventory')";
+    $query = "INSERT INTO PlantInventory (itemID, itemPrice, plantSize, plantSpecies, quantity)
+      VALUES ('$iid', '$ip', '$psize', '$pspecies', '$quantity')";
     $result = $connection->query($query);
     if (!$result)
         die($connection->error);
@@ -130,7 +122,7 @@ $query = "CREATE TABLE FishInventory (
     itemPrice    VARCHAR(32),
     fishColor    VARCHAR(32),
     fishSpecies  VARCHAR(10),
-    inventory    VARCHAR(10),
+    quantity    VARCHAR(10)
   )";
 
 $result = $connection->query($query);
@@ -146,10 +138,10 @@ add_fish($connection, "0055", "$189", "green", "bass", "2");
 add_fish($connection, "0066", "$24", "red", "octopus", "2");
 add_fish($connection, "0077", "$60", "red", "salmon", "2");
 
-function add_fish($connection, $iid, $ip, $fc, $fspecies, $inventory)
+function add_fish($connection, $iid, $ip, $fc, $fspecies, $quantity)
 {
-    $query = "INSERT INTO FishInventory (itemID, itemPrice, fishColor, fishSpecies, inventory)
-      VALUES ('$iid', '$ip', '$fc', '$fspecies','$inventory')";
+    $query = "INSERT INTO FishInventory (itemID, itemPrice, fishColor, fishSpecies, quantity)
+      VALUES ('$iid', '$ip', '$fc', '$fspecies','$quantity')";
     $result = $connection->query($query);
     if (!$result)
         die($connection->error);
