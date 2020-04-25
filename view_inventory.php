@@ -34,6 +34,8 @@ session_start();
      {
        header("Location: login_page.php");
      }
+
+
      ?>
 <?php
 echo "
@@ -42,6 +44,7 @@ echo "
   <th colspan=\"5\">FISH INVENTORY</th>
   </tr>
     <tr>
+      <th>Add to Cart</th>
       <th>ID</th>
       <th>Species</th>
       <th>Price</th>
@@ -94,16 +97,34 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 //////PLANT INVENTORY
+echo "
+<table>";
+echo"
+   <tr>
+  <th colspan=\"5\">PLANT INVENTORY</th>
+  </tr>";
+echo"    <tr>";
 
+echo"
+      <th>ID</th>
+      <th>Species</th>
+      <th>Price</th>
+      <th>Size</th>
+      <th>Quantity</th>
+    </tr>";
+
+
+echo"</table>";
 
 
 //////
 echo "
 <table>
     <tr>
-  <th colspan=\"4\">PLANT INVENTORY</th>
+  <th colspan=\"6\">PLANT INVENTORY</th>
   </tr>
     <tr>
+      <th>Add to Cart</th>
       <th>ID</th>
       <th>Species</th>
       <th>Price</th>
@@ -131,8 +152,13 @@ if ($result->num_rows > 0) {
 
 
        echo"<table>
-          <tr>
-        <td>$plantID</td>
+          <tr>";
+          echo"
+          <form method=\"post\" action=\"view_cart.php\">
+          <th> <input  type= \"submit\" name= \"$plantID\" value= \"Add to Cart\"></th>
+          </form>";
+          echo"
+              <td>$plantID</td>
                <td>$plantSpecies</td>
                <td>$plantPrice</td>
                <td>$plantSize</td>
@@ -146,7 +172,7 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
     ?>
-    <form method="post" action="Dashboard.php">
+    <form method="post" action="view_inventory.php">
       <input  type= "submit" name= "viewCart" value= "View Cart">
       <input  type= "submit" name= "logout" value= "Logout">
 
