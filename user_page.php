@@ -69,7 +69,7 @@ Date:           3/5/2020
     if ($conn->connect_error)
       die($conn->connect_error);
 
-    $query = "SELECT * FROM lab5_orders WHERE username = '$username'";
+    $query = "SELECT * FROM orders WHERE username = '$username'";
 
     $result = $conn->query($query);
 
@@ -107,7 +107,7 @@ Date:           3/5/2020
 
   }
   else{
-    
+
     echo"You must be logged in as a user to view this page. Press log out below to go to the log in page.";
   }
 
