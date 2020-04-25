@@ -6,7 +6,7 @@ session_start();
 
 <head>
   <meta charset="UTF-8">
-  <title>User Page</title>
+  <title>Dashboard</title>
   <style>
   body {
 
