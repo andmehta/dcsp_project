@@ -10,7 +10,7 @@
   Date: 2/22/2020
   -->
 
-    <title> Restaurants </title>
+    <title>Profile</title>
     <style>
     td, th, tr {
       border: 1px solid;
@@ -120,7 +120,7 @@ class User{
                   $_SESSION["active"] = 1;
                   $_SESSION["type"] = 0;
                   $_SESSION["un"] = $un_array[$i];
-                  header("Location: user_page.php");
+                  header("Location: Dashboard.php");
                   break;
                 }
                 if($t_array[$i] == "admin"){
