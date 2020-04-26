@@ -17,8 +17,7 @@ $query = "CREATE TABLE users (
     city     VARCHAR(32),
     state    VARCHAR(32), 
     zip      VARCHAR(32),
-    phone    VARCHAR(32),
-    isadmin  VARCHAR(32)
+    phone    VARCHAR(32)
   )";
 
 $result = $connection->query($query);
@@ -39,7 +38,6 @@ $city = "Ridgeland";
 $state = "Ms";
 $zip = '39157';
 $phone = "6015033475";
-$isAdmin = "True";
 $token = hash('ripemd128', "$salt1$pw$salt2");
 
 add_user($connection, $forename, $surname, $type, $username, $email, $pw, $address, $city, $state, $zip, $phone, $token);
@@ -55,7 +53,6 @@ $city = "Ridgeland";
 $state = "Ms";
 $zip = '39157';
 $phone = "6015033475";
-$isAdmin = "False";
 $token = hash('ripemd128', "$salt1$pw$salt2");
 
 add_user($connection, $forename, $surname, $type, $username, $email, $pw, $address, $city, $state, $zip, $phone, $token);
@@ -71,7 +68,6 @@ $city = "Ridgeland";
 $state = "Ms";
 $zip = '39157';
 $phone = "6015033475";
-$isAdmin = "False";
 $token = hash('ripemd128', "$salt1$pw$salt2");
 
 add_user($connection, $forename, $surname, $type, $username, $email, $pw, $address, $city, $state, $zip, $phone, $token);
