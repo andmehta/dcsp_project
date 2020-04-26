@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang = "en-US">
@@ -6,8 +5,9 @@
 <head>
 
   <!--
-
-  Date:
+  Name: Eli Lawrence
+  Program: Lab 3 restaraunts.php
+  Date: 2/22/2020
   -->
 
     <title> Restaurants </title>
@@ -23,26 +23,38 @@
 
 <?php
 
-class Cart{
+class User{
 
-    public $itemQuantity;
-    public $cartArray;
-
+    public $userID;
+    public $username;
+    public $firstname;
+    public $password;
+    public $admin;
 
 
     public function __construct()
     {
 
-          $this->itemQuantity = 0;
-          $this->cartArray = 0;
-
+          $this->userID = 0;
+          $this->username = 0;
+          $this->firstname = 0;
+          $this->password = 0;
+          $this->admin = 0;
 
     }
 
-    public function addItem()
+    public function login($in_username, $in_password)
     {
 
-      echo "blank method";
+
+      $match = 0;
+      $salt1    = "qm&h*";
+      $salt2    = "pg!@";
+      $error1 = "";
+      $error2 = "";
+
+
+
 
       //var_dump($_SESSION);
 
@@ -58,16 +70,89 @@ class Cart{
       if(!$result)
         die($conn->error);
 
+      while($row = $result->fetch_assoc())
+      {
+
+        $first_name = $row["first_name"];
+        $fn_array[] = $first_name;
+        $last_name  = $row["last_name"];
+        $sn_array[] = $last_name;
+        $username     = $row["username"];
+        $un_array[] = $username;
+        $password = $row["password"];
+        $pw_array[] = $password;
+        /*
+        $email = $row["email"];
+        $address = $row["address"];
+        $city = $row["city"];
+        $state = $row["state"];
+        $zip = $row["zip"];
+        $phone_number = $row["phone_number"];
+        */
+        $type = $row["isAdmin"];
+        $t_array[] = $type;
+
+
+
+      }
+
+
+      if(isset($_GET['Submitted']))
+      {
+        foreach($fn_array as $value)
+        {
+          ++$j;
+        }
+
+        for ($i = 0 ; $i < $j ; ++$i)
+        {
+          if($un_array[$i] == $in_username)
+            {
+
+              $error1 = "";
+              $check = hash('ripemd128', "$salt1$in_password$salt2");
+              if($check == $pw_array[$i])
+              {
+                echo "hi";
+                $match = 1;
+                $error1 = "";
+                if($t_array[$i] == "user"){
+                  $_SESSION["active"] = 1;
+                  $_SESSION["type"] = 0;
+                  $_SESSION["un"] = $un_array[$i];
+                  header("Location: user_page.php");
+                  break;
+                }
+                if($t_array[$i] == "admin"){
+                  $_SESSION["active"] = 1;
+                  $_SESSION["type"] = 1;
+
+                  header("Location: admin_page.php");
+                  break;
+                }
+
+              }
+              else{
+                $match = 0;
+                $error1 = "Invalid username or password.";
+              }
+            }
+          else{
+            $error1 = "Invalid username or password.";
+          }
+        }
+
+      }
 
       $conn->close();
-      //return $blank;
+      return $error1;
 
   }
 
-  public function removeItem()
+  public function createAccount($first_name, $last_name, $username, $password, $email, $address,
+  $city, $state, $zip, $phone_number, $isAdmin)
   {
 
-    echo "blank method";
     require "login.php";
 
     $connection = new mysqli($hn, $un, $pw, $db);
@@ -89,7 +174,7 @@ class Cart{
 
   }
 
-  public function viewCart()
+  public function viewTable()
   {
 
     require 'login.php';
@@ -165,7 +250,7 @@ class Cart{
 
   }
 
-  public function checkout()
+  public function filter($username)
   {
 
 
@@ -196,6 +281,35 @@ class Cart{
 
   }
 
+  public function email_filter($email)
+  {
+
+
+          require 'login.php';
+          //echo $username;
+
+          $conn = new mysqli($hn, $un, $pw, $db);
+          if ($conn->connect_error)
+            die($conn->connect_error);
+
+          $query = "SELECT email FROM user_table WHERE email = '$email'";
+          $result = $conn->query($query);
+          if(!$result){
+            die($conn->error);
+
+          }
+
+          while($row = $result->fetch_assoc())
+          {
+            $email1 = $row["email"];
+            //echo $email;
+          }
+
+
+          $conn->close();
+          return $email1;
+
+  }
 
 
 

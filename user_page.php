@@ -1,13 +1,9 @@
+
 <?php
 
 session_start();
 ?>
 
-<!--
-Name:           Eli Lawrence
-ID:             el862
-Assignment:     Lab 5
-Date:           3/5/2020
 -->
 
 <!DOCTYPE html>
@@ -16,14 +12,6 @@ Date:           3/5/2020
 <head>
   <meta charset="UTF-8">
   <title>User Page</title>
-  <style>
-    td, th, tr {
-      border: 1px solid;
-      text-align: center;
-      padding: 0.5em;
-      width: 100px;
-      }
-    </style>
 </head>
 
 <body>
@@ -86,8 +74,14 @@ Date:           3/5/2020
       <td> $orderTotal </td>
       <td> $quantity </td>
       <td> $shipping </td>
+
+
       </tr>
       </table>
+
+      </tr>
+      </table>
+
       ";
 
     }
@@ -113,3 +107,4 @@ Date:           3/5/2020
 </body>
 
 </html>
+
