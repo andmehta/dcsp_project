@@ -64,13 +64,14 @@ class Inventory
     {
         //Setting up the Table
         echo "<table>
-		<tr align = 'center'>
-		    <th>Inventory Image</th>
+		<tr>
+		  <th>Inventory Image</th>
 			<th>Fish Species</th>
 			<th>Fish Color</th>
 			<th>Item Price</th>
 			<th>Item Quantity</th>
 			<th>Item ID Number</th>
+			<th></th>
 		</tr>";
 		//starting the Database Connection
 		require 'login.php';
@@ -80,7 +81,7 @@ class Inventory
 		// query the database for ALL the orders
 		$query = "SELECT * FROM FishInventory";
 		$result = $conn->query($query);
-		//Displaying the Results of the Query
+		//Displaying the Results of the Fish Query
 		while($row = $result->fetch_array())
 		{
 		$fishSpecies = $row['fishSpecies'];
@@ -88,7 +89,8 @@ class Inventory
 		$itemPrice = $row['itemPrice'];
 		$itemQuantity = $row['quantity'];
 		$itemID = $row['itemID'];
-		$this->printHtml($fishSpecies,$fishColor, $itemPrice,$itemQuantity, $itemID);
+		$checkbox = "<input  type= \"submit\" name= \"test\" value= \"Add to Cart\">";
+		$this->printHtml($fishSpecies,$fishColor, $itemPrice,$itemQuantity, $itemID, $checkbox);
 		}
 		echo "</table>";
 		}
@@ -104,6 +106,7 @@ class Inventory
 				<th>Item Price</th>
 				<th>Item Quantity</th>
 				<th>Item ID Number</th>
+				<th></th>
 			</tr>";
 			//starting the Database Connection
 			require 'login.php';
@@ -113,7 +116,7 @@ class Inventory
 			// query the database for ALL of the Plants
 			$query = "SELECT * FROM PlantInventory";
 			$result = $conn->query($query);
-			//Displaying the Results of the Query
+			//Displaying the Results of the Plants Query
 			while($row = $result->fetch_array() )
 			{
 			$itemID = $row['itemID'];
@@ -121,13 +124,14 @@ class Inventory
 			$plantSize = $row['plantSize'];
 			$plantSpecies = $row['plantSpecies'];
 			$itemQuantity = $row['quantity'];
-			$this->printHtml($plantSpecies,$plantSize, $itemPrice,$itemQuantity, $itemID);
+			$checkbox = "<input  type= \"submit\" name= \"$itemID\" value= \"Add to Cart\">";
+			$this->printHtml($plantSpecies,$plantSize, $itemPrice,$itemQuantity, $itemID, $checkbox);
 			}
 			echo "</table>";
 		}
 
 
-		public function printHtml($item1, $item2, $item3, $item4, $item5)
+		public function printHtml($item1, $item2, $item3, $item4, $item5, $item6)
 		{
 		echo "
 		<tr align = 'center'>
@@ -137,6 +141,7 @@ class Inventory
 			<td valign = 'middle' width = '25%'>$item3</td>
 			<td valign = 'middle' width = '25%'>$item4</td>
 			<td valign = 'middle' width = '25%'>$item5</td>
+			<td valign = 'middle' width = '25%'>$item6</td>
 		</tr>
 		";
 		}
