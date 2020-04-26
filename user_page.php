@@ -1,14 +1,8 @@
 
 <?php
+
 session_start();
 ?>
-
-<!--
-
-Name:           Eli Lawrence
-ID:             el862
-Assignment:     Lab 5
-Date:           3/5/2020
 
 -->
 
@@ -18,14 +12,6 @@ Date:           3/5/2020
 <head>
   <meta charset="UTF-8">
   <title>User Page</title>
-  <style>
-    td, th, tr {
-      border: 1px solid;
-      text-align: center;
-      padding: 0.5em;
-      width: 100px;
-      }
-    </style>
 </head>
 
 <body>
@@ -52,15 +38,12 @@ Date:           3/5/2020
     require 'login.php';
 
     echo"<table>
-
     <tr>
       <th> Order ID </th>
       <th> Order Total </th>
       <th> Order Quantity </th>
       <th> Shipping Method </th>
     </tr>
-
-
     </table>";
 
 
@@ -85,7 +68,6 @@ Date:           3/5/2020
       $shipping = $row["shipping"];
 
       echo "
-
       <table>
       <tr>
       <td> $orderID </td>
@@ -93,9 +75,12 @@ Date:           3/5/2020
       <td> $quantity </td>
       <td> $shipping </td>
 
+
       </tr>
       </table>
 
+      </tr>
+      </table>
 
       ";
 
@@ -107,7 +92,7 @@ Date:           3/5/2020
 
   }
   else{
-    
+
     echo"You must be logged in as a user to view this page. Press log out below to go to the log in page.";
   }
 
@@ -122,3 +107,4 @@ Date:           3/5/2020
 </body>
 
 </html>
+

@@ -11,8 +11,15 @@ $query = "CREATE TABLE users (
     surname  VARCHAR(32),
     type     VARCHAR(10),
     username VARCHAR(32),
-    password VARCHAR(32)
+    email    VARCHAR(32),
+    password VARCHAR(32),
+    address  VARCHAR(32),
+    city     VARCHAR(32),
+    state    VARCHAR(32),
+    zip      VARCHAR(32),
+    phone    VARCHAR(32)
   )";
+
 $result = $connection->query($query);
 if (!$result)
     die($connection->error);
@@ -24,37 +31,55 @@ $forename = 'Jake';
 $surname = 'Manning';
 $type = 'user';
 $username = 'jm';
-$password = 'password';
-$token = hash('ripemd128', "$salt1$password$salt2");
+$email = 'jm@gmail.com';
+$pw = 'password';
+$address = '107 Cherry Laurel';
+$city = "Ridgeland";
+$state = "Ms";
+$zip = '39157';
+$phone = "6015033475";
+$token = hash('ripemd128', "$salt1$pw$salt2");
 
-add_user($connection, $forename, $surname, $type, $username, $token);
+add_user($connection, $forename, $surname, $type, $username, $email, $pw, $address, $city, $state, $zip, $phone, $token);
 
-$forename = 'Eli';
-$surname = 'Lawrence';
+$forename = 'Jake';
+$surname = 'Manning';
 $type = 'user';
-$username = 'el';
-$password = 'password';
-$token = hash('ripemd128', "$salt1$password$salt2");
+$username = 'jm';
+$email = 'jm@gmail.com';
+$pw = 'password';
+$address = '107 Cherry Laurel';
+$city = "Ridgeland";
+$state = "Ms";
+$zip = '39157';
+$phone = "6015033475";
+$token = hash('ripemd128', "$salt1$pw$salt2");
 
-add_user($connection, $forename, $surname, $type, $username, $token);
+add_user($connection, $forename, $surname, $type, $username, $email, $pw, $address, $city, $state, $zip, $phone, $token);
 
-$forename = 'Andrew';
-$surname = 'Mehta';
-$type = 'admin';
-$username = 'admin';
-$password = 'admin';
-$token = hash('ripemd128', "$salt1$password$salt2");
+$forename = 'Jake';
+$surname = 'Manning';
+$type = 'user';
+$username = 'jm';
+$email = 'jm@gmail.com';
+$pw = 'password';
+$address = '107 Cherry Laurel';
+$city = "Ridgeland";
+$state = "Ms";
+$zip = '39157';
+$phone = "6015033475";
+$token = hash('ripemd128', "$salt1$pw$salt2");
 
-add_user($connection, $forename, $surname, $type, $username, $token);
+add_user($connection, $forename, $surname, $type, $username, $email, $pw, $address, $city, $state, $zip, $phone, $token);
 
 echo 'Table Users created and populated<br>';
 
 //Creating a function for continued addition
 
-function add_user($connection, $fn, $sn, $ty, $un, $pw)
+function add_user($connection, $fn, $sn, $ty, $un,$email, $pw,$address,$city,$state,$zip,$phone,$token)
 {
-    $query = "INSERT INTO users (forename, surname, type, username, password)
-      VALUES('$fn', '$sn', '$ty', '$un', '$pw')";
+    $query = "INSERT INTO users (forename, surname, type, username, email, password, address, city, state, zip, phone)
+      VALUES('$fn', '$sn', '$ty', '$un','$email', '$pw','$address','$city','$state','$zip','$phone')";
     $result = $connection->query($query);
     if (!$result){
         die($connection->error);
@@ -62,6 +87,44 @@ function add_user($connection, $fn, $sn, $ty, $un, $pw)
 }
 // --------------- Finished the USERS Table --------------- //
 
+
+
+// --------------- Creating the Orders Table --------------- //
+
+$connection = new mysqli($host, $user, $pass, $db_name);
+if ($connection->connect_error){
+    die($connection->error);
+}
+
+$query = "CREATE TABLE Orders (
+    orderid      VARCHAR(32),
+    username     VARCHAR(32),
+    totalCost    VARCHAR(32),
+    datePlaced    VARCHAR(32)
+  )";
+
+$result = $connection->query($query);
+
+if (!$result)
+    die($connection->error);
+
+add_order($connection, "1","jake", "$23", "4/25");
+add_order($connection, "2","andrew", "$54323", "4/28");
+add_order($connection, "3","daniel", "$234", "4/21");
+add_order($connection, "4","boyce", "$3", "4/22");
+add_order($connection, "5","eli", "$432", "4/24");
+
+
+function add_order($connection, $orderid, $username, $totalCost, $datePlaced)
+{
+    $query = "INSERT INTO Orders (username, totalCost, datePlaced)
+      VALUES ('$username', '$totalCost', '$datePlaced')";
+    $result = $connection->query($query);
+    if (!$result)
+        die($connection->error);
+}
+
+echo 'Table Orders created and populated<br>';
 
 
 
